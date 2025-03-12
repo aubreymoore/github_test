@@ -34,7 +34,7 @@ df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['HM'] = df['timestamp'].dt.strftime('%H:%M')
 df['download_Mbps'] = df['download_Mbps'].astype(float)
 df['upload_Mbps'] = df['upload_Mbps'].astype(float)
-ic(df)
+# ic(df)
 
 # Plot the data and save as PNG
 df.plot(
