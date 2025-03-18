@@ -38,7 +38,7 @@ ic(df)
 
 # Plot the data and save as PNG
 df.plot(
-    x='HM',
+    x='timestamp',
     y=['download_Mbps', 'upload_Mbps'],
     ylim=[0,300],
     title=LOG_PATH,
