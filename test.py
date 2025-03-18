@@ -37,15 +37,15 @@ df['download_Mbps'] = df['download_Mbps'].astype(float)
 df['upload_Mbps'] = df['upload_Mbps'].astype(float)
 ic(df)
 
-xformatter = md.DateFormatter('%H:%M')
+# xformatter = md.DateFormatter('%H:%M')
 # Plot the data and save as PNG
 df.plot(
     x='timestamp',
     y=['download_Mbps', 'upload_Mbps'],
     ylim=[0,300],
     title=LOG_PATH,
-    xlabel='time (hour:minute)',
-    ylabel='network speed (Mbps)',
-    xformatter='xformatter'
+    xlabel='time',
+    ylabel='network speed (Mbps)'
 );
+plt.gcf().autofmt_xdate()
 plt.savefig(LOG_PATH.replace('.log', '.png'))
