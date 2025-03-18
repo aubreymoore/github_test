@@ -2,6 +2,7 @@ import re
 from icecream import ic
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.dates as md
 
 LOG_PATH = '/home/aubrey/Desktop/git_test/logs/2025-03-18.log'
 
@@ -36,6 +37,7 @@ df['download_Mbps'] = df['download_Mbps'].astype(float)
 df['upload_Mbps'] = df['upload_Mbps'].astype(float)
 ic(df)
 
+xformatter = md.DateFormatter('%H:%M')
 # Plot the data and save as PNG
 df.plot(
     x='timestamp',
@@ -43,6 +45,7 @@ df.plot(
     ylim=[0,300],
     title=LOG_PATH,
     xlabel='time (hour:minute)',
-    ylabel='network speed (Mbps)'
+    ylabel='network speed (Mbps)',
+    xformatter='xformatter'
 );
 plt.savefig(LOG_PATH.replace('.log', '.png'))
