@@ -3,7 +3,7 @@ from icecream import ic
 import pandas as pd
 import matplotlib.pyplot as plt
 
-LOG_PATH = '/home/aubrey/Desktop/git_test/logs/2025-03-12.log'
+LOG_PATH = '/home/aubrey/Desktop/git_test/logs/2025-03-18.log'
 
 # Read the log file
 with open(LOG_PATH) as f:
@@ -34,7 +34,7 @@ df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['HM'] = df['timestamp'].dt.strftime('%H:%M')
 df['download_Mbps'] = df['download_Mbps'].astype(float)
 df['upload_Mbps'] = df['upload_Mbps'].astype(float)
-# ic(df)
+ic(df)
 
 # Plot the data and save as PNG
 df.plot(
