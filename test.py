@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as md
 
-LOG_PATH = '/home/aubrey/Desktop/git_test/logs/2025-03-18.log'
+LOG_PATH = '/home/aubrey/Desktop/git_test/logs/2025-03-19.log'
 
 # Read the log file
 with open(LOG_PATH) as f:
