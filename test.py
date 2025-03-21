@@ -49,7 +49,9 @@ def process_log(log_path):
         ylabel='network speed (Mbps)'
     );
     plt.gcf().autofmt_xdate()
-    plt.savefig(log_path.replace('.log', '.png'))
+    png_path = log_path.replace('.log', '.png')
+    plt.savefig(png_path)
+    ic(f'{png_path} saved or updated')
 
 # MAIN
 
