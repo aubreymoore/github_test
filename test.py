@@ -4,12 +4,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as md
 import glob
-
-LOG_PATH = '/home/aubrey/Desktop/git_test/logs/2025-03-19.log'
+import os
 
 def process_log(log_path):
     # Read the log file
-    with open(LOG_PATH) as f:
+    with open(log_path) as f:
         lines = f.readlines()
 
     # Parse the log data, extracting timestamp, download_Mbps, and upload_Mbps using regular expressions.
@@ -37,7 +36,7 @@ def process_log(log_path):
     df['HM'] = df['timestamp'].dt.strftime('%H:%M')
     df['download_Mbps'] = df['download_Mbps'].astype(float)
     df['upload_Mbps'] = df['upload_Mbps'].astype(float)
-    ic(df)
+    # ic(df)
 
     # xformatter = md.DateFormatter('%H:%M')
     # Plot the data and save as PNG
@@ -45,15 +44,28 @@ def process_log(log_path):
         x='timestamp',
         y=['download_Mbps', 'upload_Mbps'],
         ylim=[0,300],
-        title=LOG_PATH,
+        title=log_path,
         xlabel='time',
         ylabel='network speed (Mbps)'
     );
     plt.gcf().autofmt_xdate()
-    plt.savefig(LOG_PATH.replace('.log', '.png'))
+    plt.savefig(log_path.replace('.log', '.png'))
 
 # MAIN
 
-loglist = sorted(glob.glob('logs/*.log'))
-ic(loglist)
+log_paths = sorted(glob.glob('logs/*.log'))
+for log_path in log_paths:
+    png_path = log_path.replace('.log', '.png')
+    png_path_exists = os.path.exists(png_path)
+
+    if png_path_exists:
+        # If the log file was modified after the png figure was modified, update the png
+        if os.path.getmtime(log_path) > os.path.getmtime(png_path):
+            ic(f'processing {log_path}')
+            process_log(log_path)
+    else:
+        # If a png figure does not exist for a log file, create one
+        ic(f'processing {log_path}')
+        process_log(log_path)
+
 ic('Finished')
